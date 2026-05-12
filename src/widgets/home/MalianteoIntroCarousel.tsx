@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 export function MalianteoIntroCarousel() {
   const { language } = useSiteLanguage();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isInteracting, setIsInteracting] = useState(false);
   const photos =
     language === "en"
       ? [
@@ -50,16 +52,40 @@ export function MalianteoIntroCarousel() {
         ];
   const track = [...photos, ...photos];
 
+  useEffect(() => {
+    const node = scrollerRef.current;
+    if (!node) return;
+
+    let frameId = 0;
+    const speed = 0.45;
+
+    const tick = () => {
+      const limit = node.scrollWidth / 2;
+      if (!isInteracting) {
+        node.scrollLeft += speed;
+        if (node.scrollLeft >= limit) node.scrollLeft -= limit;
+      }
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isInteracting]);
+
   return (
     <div className="mt-6">
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/40 p-3">
+      <div
+        ref={scrollerRef}
+        className="relative overflow-x-auto rounded-3xl border border-white/10 bg-black/40 p-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onMouseDown={() => setIsInteracting(true)}
+        onMouseUp={() => setIsInteracting(false)}
+        onMouseLeave={() => setIsInteracting(false)}
+        onTouchStart={() => setIsInteracting(true)}
+        onTouchEnd={() => setIsInteracting(false)}
+      >
         <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-black/90 to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-black/90 to-transparent" />
-        <motion.div
-          className="flex w-max gap-3"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 34, ease: "linear", repeat: Infinity }}
-        >
+        <div className="flex w-max gap-3">
           {track.map((item, i) => (
             <article
               key={`${item.src}-${i}`}
@@ -80,7 +106,7 @@ export function MalianteoIntroCarousel() {
               </div>
             </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -20,20 +20,20 @@ export default function CotizacionTamanoPage() {
         {
           id: "pequeno" as const,
           label: "Pequeño",
-          detail: "(5-10 cm)",
-          img: "https://lh3.googleusercontent.com/aida/ADBb0ujIjL5LCbOj9GCrAJNYWGDzYOLARysY8VJNCvyY-t-7ECb2ECsqbxRDeEnn7fx2uc00YjjTAxoWLbENwVzz5pLT4HbRExdJwm_7lt8ijtsVipl5h7JC5ICRPXGwv8UKG-dBc-E6LKKt_iccSDNF2a5qrkeobNGQaLrn-z5yn0tuVJlw1Gm1xwcihQhbVR4nzW-mtej2gpUH-yqPPPmif3AwFWWt2jE8bbZbyII_Iyx5SZZ1m0mtpFUjWQr9puoTw0zUv79XuOm3VQ",
+          detail: "(6-10 cm)",
+          img: "/quote-sizes/small-reference.png",
         },
         {
           id: "mediano" as const,
           label: "Mediano",
-          detail: "(10-20 cm)",
-          img: "https://lh3.googleusercontent.com/aida/ADBb0uhdczglQyCumuzemahLZlA5tvx4ng83u8H8jrFSheEp-ANgzgQUjPGI9LesuLlk_mhA9bSbs4CYxVXJxCJQuk47X8jETtK1zSwt_0VvCzqzgbPJR28moVNZ50Z-DyD7ib80rfjfqXSZlhkebmiRrXFJAyCATVMRze63HOl0Ug1wgCS2RE5dY1aOG2jG7aMctdm71j4ixWQ8uxAKrKlBdcEtSJHbKfbz5-9tvGfd-TyPFd_RidFJNfmunDlFs1PuydnkKPWEP7fMXg",
+          detail: "(15-25 cm)",
+          img: "/quote-sizes/medium-reference.png",
         },
         {
           id: "grande" as const,
           label: "Grande",
-          detail: "(20+ cm)",
-          img: "https://lh3.googleusercontent.com/aida/ADBb0uhqAfmKbG80pk0zJGaq5SJ6hb2p4n6S6-RiMY1Zs8fA0LBl1xLDDonA4RRViAadi9VHlhYZiSD55HfxMrSI43NsiEZkWkfZmtV-Olp41eUeCU4hJwiZ-rDz2fzqXrSfpq_u9ziL8EbbfBUUq2us1wGYu0sQ1781mwLEWET8ZA7-fL0qrAmcnwGdlPXajzJj8QockX33jJgo5S6UL8oDPZl4yjVmAzBATUZ9o36kfG9X3B2v8uqlH3Cyvv0JUqqxOdWzM0ZJMJ1htA",
+          detail: "(35-55 cm)",
+          img: "/quote-sizes/large-reference.png",
         },
       ] satisfies Array<{
         id: SizeOption;
@@ -90,7 +90,7 @@ export default function CotizacionTamanoPage() {
                 <div className="relative">
                   <div
                     className={[
-                      "relative mb-4 aspect-square max-h-32 w-full overflow-hidden rounded-lg border",
+                      "relative mb-4 aspect-square max-h-44 w-full overflow-hidden rounded-lg border md:max-h-48",
                       selected
                         ? "border-violet-500/30 bg-black/60"
                         : "border-white/5 bg-black/40",

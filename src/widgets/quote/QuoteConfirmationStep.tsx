@@ -85,36 +85,14 @@ export function QuoteConfirmationStep({
           </div>
         </article>
 
-        <article className="glass-card rounded-2xl p-5 md:sticky md:top-24 md:h-fit">
-          <p className="typo-tech uppercase tracking-[0.16em] text-zinc-300">
-            {language === "en" ? "Action" : "Accion"}
-          </p>
-          <h2 className="typo-subtitle mt-2">{t("quoteActionTitle")}</h2>
-          <p className="typo-body mt-3 text-sm text-zinc-300">{t("quoteActionBody")}</p>
+        <article className="glass-card flex items-center rounded-2xl p-5 md:sticky md:top-24 md:h-fit">
           <Link
-            href="/contacto"
-            className="typo-cta mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet-500/35 bg-gradient-to-r from-violet-700 to-fuchsia-600 px-5 py-4 text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(139,92,246,0.35)] active:translate-y-0"
+            href="/cotizacion/gracias"
+            className="typo-cta inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet-500/35 bg-gradient-to-r from-violet-700 to-fuchsia-600 px-5 py-4 text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(139,92,246,0.35)] active:translate-y-0"
           >
             {t("quoteActionCta")}
           </Link>
-          <p className="typo-tech mt-2 text-zinc-400">{t("quoteActionReply")}</p>
         </article>
-      </section>
-
-      <section className="mt-5 flex items-center justify-between gap-3">
-        <Link
-          href={`/cotizacion/referencia?size=${encodeURIComponent(size.toLowerCase())}&zone=${encodeURIComponent(zone.toLowerCase())}&style=${encodeURIComponent(style)}`}
-          className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-zinc-100 transition hover:bg-white/8"
-        >
-          {t("commonBack")}
-        </Link>
-
-        <Link
-          href="/contacto"
-          className="rounded-xl border border-violet-500/35 bg-violet-600/15 px-5 py-3 text-sm font-semibold text-violet-100 transition hover:bg-violet-600/20"
-        >
-          {t("quoteTalkWhatsapp")}
-        </Link>
       </section>
     </QuoteShell>
   );

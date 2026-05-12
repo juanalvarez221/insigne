@@ -1,105 +1,140 @@
 "use client";
 
+import Image from "next/image";
 import { Bone, CircleDot, PersonStanding, Sparkles } from "lucide-react";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 export type ZoneId =
+  | "cabeza"
+  | "bicep"
+  | "tricep"
   | "brazo"
   | "antebrazo"
   | "hombro"
   | "pecho"
   | "abdomen"
   | "espalda"
-  | "pierna";
+  | "pierna"
+  | "gluteo";
 
 type ZoneMap = {
   id: ZoneId;
   label: string;
 };
 
+type Hotspot = {
+  id: ZoneId;
+  className: string;
+};
+
 const ZONES: ZoneMap[] = [
-  { id: "brazo", label: "Brazo" },
-  { id: "antebrazo", label: "Antebrazo" },
+  { id: "cabeza", label: "Cabeza" },
   { id: "hombro", label: "Hombro" },
+  { id: "espalda", label: "Espalda" },
   { id: "pecho", label: "Pecho" },
   { id: "abdomen", label: "Abdomen" },
-  { id: "espalda", label: "Espalda completa" },
+  { id: "tricep", label: "Tricep" },
+  { id: "bicep", label: "Bicep" },
+  { id: "antebrazo", label: "Antebrazo" },
   { id: "pierna", label: "Pierna" },
+  { id: "gluteo", label: "Gluteo" },
+  { id: "brazo", label: "Brazo" },
 ];
 
 const POPULAR_ZONES: ZoneId[] = [
-  "antebrazo",
-  "brazo",
-  "pecho",
-  "espalda",
-  "pierna",
+  "cabeza",
   "hombro",
+  "espalda",
+  "pecho",
+  "abdomen",
+  "bicep",
+  "tricep",
+  "antebrazo",
+  "pierna",
+  "gluteo",
 ];
 
-function BodySilhouette({
+const FRONT_HOTSPOTS: Hotspot[] = [
+  { id: "cabeza", className: "left-[39%] top-[2.5%] h-[13%] w-[22%]" },
+  { id: "hombro", className: "left-[31%] top-[15.5%] h-[8%] w-[38%]" },
+  { id: "pecho", className: "left-[34%] top-[23.5%] h-[11%] w-[32%]" },
+  { id: "abdomen", className: "left-[36%] top-[35.5%] h-[11%] w-[28%]" },
+  { id: "bicep", className: "left-[22%] top-[24%] h-[11%] w-[10%]" },
+  { id: "bicep", className: "left-[68%] top-[24%] h-[11%] w-[10%]" },
+  { id: "antebrazo", className: "left-[17%] top-[35%] h-[14%] w-[10%]" },
+  { id: "antebrazo", className: "left-[73%] top-[35%] h-[14%] w-[10%]" },
+  { id: "pierna", className: "left-[37%] top-[57%] h-[35%] w-[26%]" },
+];
+
+const BACK_HOTSPOTS: Hotspot[] = [
+  { id: "cabeza", className: "left-[39%] top-[2.5%] h-[13%] w-[22%]" },
+  { id: "hombro", className: "left-[31%] top-[15.5%] h-[8%] w-[38%]" },
+  { id: "espalda", className: "left-[33%] top-[24%] h-[20%] w-[34%]" },
+  { id: "tricep", className: "left-[22%] top-[25%] h-[12%] w-[10%]" },
+  { id: "tricep", className: "left-[68%] top-[25%] h-[12%] w-[10%]" },
+  { id: "antebrazo", className: "left-[18%] top-[37%] h-[13%] w-[10%]" },
+  { id: "antebrazo", className: "left-[72%] top-[37%] h-[13%] w-[10%]" },
+  { id: "gluteo", className: "left-[35%] top-[46.5%] h-[10%] w-[30%]" },
+  { id: "pierna", className: "left-[37%] top-[57%] h-[35%] w-[26%]" },
+];
+
+function BodyMapImage({
   side,
   zone,
+  onZoneChange,
+  language,
 }: {
   side: "front" | "back";
   zone: ZoneId;
+  onZoneChange: (zone: ZoneId) => void;
+  language: "es" | "en";
 }) {
-  const isActive = (id: ZoneId) => zone === id;
-  const zoneClass = (id: ZoneId) =>
-    isActive(id)
-      ? "fill-teal-300/35 stroke-teal-200/80"
-      : "fill-transparent stroke-transparent";
+  const hotspots = side === "front" ? FRONT_HOTSPOTS : BACK_HOTSPOTS;
+  const src = side === "front" ? "/body/body-map-front.png" : "/body/body-map-back.png";
 
   return (
-    <div className="relative h-[260px] w-full max-w-[170px] overflow-hidden rounded-xl border border-white/10 bg-[radial-gradient(circle_at_40%_15%,rgba(255,255,255,0.1),transparent_50%),linear-gradient(180deg,#111319,#090a0f)] sm:h-[300px]">
-      <svg
-        viewBox="0 0 170 300"
-        className="h-full w-full"
-        aria-label={
-          side === "front" ? "Silueta anatómica frontal" : "Silueta anatómica posterior"
-        }
-        role="img"
-      >
-        <defs>
-          <linearGradient id="bodyStroke" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(210,220,255,0.55)" />
-            <stop offset="100%" stopColor="rgba(210,220,255,0.28)" />
-          </linearGradient>
-        </defs>
+    <div className="glass-card relative overflow-hidden rounded-2xl p-3">
+      <div className="relative mx-auto h-[390px] w-full max-w-[260px] overflow-hidden rounded-xl border border-white/12 bg-black/20 sm:h-[460px] sm:max-w-[300px]">
+        <Image
+          src={src}
+          alt={side === "front" ? "Mapa corporal frontal" : "Mapa corporal trasero"}
+          fill
+          quality={100}
+          sizes="(max-width: 640px) 260px, 300px"
+          className="object-cover"
+          priority
+        />
 
-        <g className="stroke-[1.4]" stroke="url(#bodyStroke)" fill="none">
-          <circle cx="85" cy="34" r="16" />
-          <path d="M58 62 C66 50, 104 50, 112 62 L118 110 C120 124, 112 138, 103 150 L98 195 L94 257 L86 257 L85 196 L84 257 L76 257 L72 195 L67 150 C58 138, 50 124, 52 110 Z" />
-          <path d="M58 66 L42 94 L48 150 L58 150 L63 112" />
-          <path d="M112 66 L128 94 L122 150 L112 150 L107 112" />
-        </g>
+        {hotspots.map((spot, index) => {
+          const active = zone === spot.id;
+          const label = ZONES.find((item) => item.id === spot.id)?.label ?? spot.id;
+          return (
+            <button
+              key={`${side}-${spot.id}-${index}`}
+              type="button"
+              onClick={() => onZoneChange(spot.id)}
+              aria-label={`${label} (${side})`}
+              className={[
+                "absolute rounded-lg border transition",
+                spot.className,
+                active
+                  ? "border-teal-200/90 bg-teal-300/20 shadow-[0_0_0_1px_rgba(94,234,212,0.45)_inset]"
+                  : "border-white/30 bg-black/10 hover:border-teal-200/60 hover:bg-teal-300/10",
+              ].join(" ")}
+            />
+          );
+        })}
+      </div>
 
-        <g className="stroke-[1.2]">
-          {side === "front" ? (
-            <>
-              <rect x="40" y="68" width="22" height="18" rx="8" className={zoneClass("hombro")} />
-              <rect x="108" y="68" width="22" height="18" rx="8" className={zoneClass("hombro")} />
-              <rect x="42" y="88" width="18" height="42" rx="9" className={zoneClass("brazo")} />
-              <rect x="110" y="88" width="18" height="42" rx="9" className={zoneClass("brazo")} />
-              <rect x="44" y="132" width="16" height="34" rx="8" className={zoneClass("antebrazo")} />
-              <rect x="110" y="132" width="16" height="34" rx="8" className={zoneClass("antebrazo")} />
-              <rect x="62" y="70" width="46" height="32" rx="12" className={zoneClass("pecho")} />
-              <rect x="64" y="104" width="42" height="42" rx="12" className={zoneClass("abdomen")} />
-              <rect x="68" y="150" width="34" height="104" rx="14" className={zoneClass("pierna")} />
-            </>
-          ) : (
-            <>
-              <rect x="40" y="68" width="22" height="18" rx="8" className={zoneClass("hombro")} />
-              <rect x="108" y="68" width="22" height="18" rx="8" className={zoneClass("hombro")} />
-              <rect x="42" y="88" width="18" height="42" rx="9" className={zoneClass("brazo")} />
-              <rect x="110" y="88" width="18" height="42" rx="9" className={zoneClass("brazo")} />
-              <rect x="44" y="132" width="16" height="34" rx="8" className={zoneClass("antebrazo")} />
-              <rect x="110" y="132" width="16" height="34" rx="8" className={zoneClass("antebrazo")} />
-              <rect x="58" y="74" width="54" height="84" rx="14" className={zoneClass("espalda")} />
-              <rect x="68" y="150" width="34" height="104" rx="14" className={zoneClass("pierna")} />
-            </>
-          )}
-        </g>
-      </svg>
+      <span className="mt-2 block text-center text-xs font-semibold uppercase tracking-[0.16em] text-zinc-300">
+        {side === "front"
+          ? language === "en"
+            ? "Front view"
+            : "Vista frontal"
+          : language === "en"
+            ? "Back view"
+            : "Vista posterior"}
+      </span>
     </div>
   );
 }
@@ -141,19 +176,9 @@ export function BodyAreaSelector({
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <div className="glass-card flex flex-col items-center justify-center rounded-2xl p-3">
-          <BodySilhouette side="front" zone={zone} />
-          <span className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
-            {language === "en" ? "Front view" : "Vista frontal"}
-          </span>
-        </div>
-        <div className="glass-card flex flex-col items-center justify-center rounded-2xl p-3">
-          <BodySilhouette side="back" zone={zone} />
-          <span className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
-            {language === "en" ? "Back view" : "Vista posterior"}
-          </span>
-        </div>
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <BodyMapImage side="front" zone={zone} onZoneChange={onZoneChange} language={language} />
+        <BodyMapImage side="back" zone={zone} onZoneChange={onZoneChange} language={language} />
       </div>
 
       <div>

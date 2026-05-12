@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 const REELS = [
@@ -24,8 +24,40 @@ const REELS = [
 
 export function ProjectsCarousel() {
   const { t } = useSiteLanguage();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isInteracting, setIsInteracting] = useState(false);
   // Mantener loop continuo con menor carga de decodificación simultánea.
   const reelTrack = [...REELS, ...REELS];
+
+  useEffect(() => {
+    const node = scrollerRef.current;
+    if (!node) return;
+
+    let frameId = 0;
+    const speedPxPerSecond = 34;
+    let current = node.scrollLeft;
+    let last = performance.now();
+
+    const tick = () => {
+      const limit = node.scrollWidth / 2;
+      if (!isInteracting) {
+        const now = performance.now();
+        const deltaSeconds = (now - last) / 1000;
+        last = now;
+
+        current += speedPxPerSecond * deltaSeconds;
+        if (limit > 0 && current >= limit) current -= limit;
+        node.scrollLeft = current;
+      } else {
+        current = node.scrollLeft;
+        last = performance.now();
+      }
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isInteracting]);
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/65 p-5 md:p-8">
@@ -43,15 +75,20 @@ export function ProjectsCarousel() {
         </p>
       </div>
 
-      <div className="relative mt-6 overflow-hidden rounded-3xl border border-white/10 bg-black/45 p-3">
+      <div
+        ref={scrollerRef}
+        className="relative mt-6 overflow-x-auto rounded-3xl border border-white/10 bg-black/45 p-3 [scrollbar-width:none] touch-pan-x [&::-webkit-scrollbar]:hidden"
+        onMouseDown={() => setIsInteracting(true)}
+        onMouseUp={() => setIsInteracting(false)}
+        onMouseLeave={() => setIsInteracting(false)}
+        onTouchStart={() => setIsInteracting(true)}
+        onTouchEnd={() => setIsInteracting(false)}
+        onTouchCancel={() => setIsInteracting(false)}
+      >
         <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-black/85 to-transparent md:w-16" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-black/85 to-transparent md:w-16" />
 
-        <motion.div
-          className="flex w-max transform-gpu gap-4 will-change-transform"
-          animate={{ x: ["-50%", "0%"] }}
-          transition={{ duration: 145, ease: "linear", repeat: Infinity }}
-        >
+        <div className="flex w-max transform-gpu gap-4 will-change-transform">
           {reelTrack.map((reel, i) => (
             <article
               key={`${reel.src}-${i}`}
@@ -63,7 +100,7 @@ export function ProjectsCarousel() {
                   <video
                     title={`Reel ${i + 1} de Malianteo`}
                     src={reel.src}
-                    className="h-full w-full object-cover"
+                    className="pointer-events-none h-full w-full select-none object-cover"
                     autoPlay
                     muted
                     loop
@@ -78,13 +115,14 @@ export function ProjectsCarousel() {
                     fill
                     quality={92}
                     sizes="(max-width: 640px) 82vw, (max-width: 1024px) 44vw, 30vw"
-                    className="h-full w-full object-cover"
+                    className="pointer-events-none h-full w-full select-none object-cover"
+                    draggable={false}
                   />
                 )}
               </div>
             </article>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <div className="relative mt-6 overflow-hidden rounded-2xl border border-violet-400/20 bg-[radial-gradient(560px_220px_at_8%_0%,rgba(168,85,247,0.24),transparent_62%),linear-gradient(180deg,rgba(255,255,255,0.06),transparent_30%),#0d0d10] p-5 md:p-6">

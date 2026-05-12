@@ -8,9 +8,9 @@ import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 const STYLE_OPTIONS = [
   "Realismo oscuro",
-  "Realismo blanco y negro",
   "Surrealismo",
-  "Fineline",
+  "Lineas",
+  "Malianteo Style",
 ] as const;
 
 export function QuoteStyleStep({ size, zone }: { size: string; zone: string }) {
