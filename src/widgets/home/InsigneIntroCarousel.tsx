@@ -18,16 +18,10 @@ export function InsigneIntroCarousel() {
             caption: "Street energy, precision, and visual storytelling.",
           },
           {
-            src: "/brand/wordmark-insigne.png",
-            alt: "Insigne Corpus logo",
-            title: "Insigne Corpus",
-            caption: "Professional tattoo studio with classic character.",
-          },
-          {
             src: "/brand/leandro-tatuando.png",
-            alt: "Leandro tattooing",
-            title: "Technique and presence",
-            caption: "Every piece is built with concept, structure, and detail.",
+            alt: "Leandro at Insigne studio",
+            title: "Insigne Corpus Studio",
+            caption: "Professional environment, classic character, real craft.",
           },
         ]
       : [
@@ -38,16 +32,10 @@ export function InsigneIntroCarousel() {
             caption: "Leandro fusiona calle, tecnica limpia y narrativa visual.",
           },
           {
-            src: "/brand/wordmark-insigne.png",
-            alt: "Logo Insigne Corpus",
-            title: "Insigne Corpus",
-            caption: "Estudio de tatuaje profesional con estetica clasica.",
-          },
-          {
             src: "/brand/leandro-tatuando.png",
-            alt: "Leandro tatuando",
-            title: "Tecnica y presencia",
-            caption: "Cada pieza se plantea con concepto, estructura y detalle.",
+            alt: "Leandro en el estudio Insigne",
+            title: "Estudio Insigne Corpus",
+            caption: "Ambiente profesional, estetica clasica y oficio real.",
           },
         ];
   const track = [...photos, ...photos];

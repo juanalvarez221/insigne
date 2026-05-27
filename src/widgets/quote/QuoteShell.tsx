@@ -39,7 +39,7 @@ export function QuoteShell({
           preload="auto"
         />
         <div className="absolute inset-0 bg-black/42" />
-        <div className="absolute inset-0 bg-[radial-gradient(920px_520px_at_50%_0%,rgba(139,92,246,0.22),transparent_64%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(920px_520px_at_50%_0%,rgba(234,88,12,0.2),transparent_64%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0.55)_62%,rgba(0,0,0,0.74)_100%)]" />
       </div>
 
@@ -73,7 +73,7 @@ export function QuoteShell({
         className="relative z-10 w-full px-4 pb-28 pt-8 sm:px-6 md:px-10"
       >
         {firstName ? (
-          <p className="typo-body mb-6 max-w-2xl leading-relaxed text-violet-100/95">
+          <p className="typo-body mb-6 max-w-2xl leading-relaxed text-amber-50/95">
             {t("quoteGreeting", { name: firstName })}
           </p>
         ) : null}

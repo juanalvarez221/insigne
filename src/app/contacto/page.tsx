@@ -7,7 +7,7 @@ export default function ContactoPage() {
   return (
     <AppShell>
       <header>
-        <p className="text-xs font-semibold tracking-[0.18em] text-violet-200/70 uppercase">
+        <p className="text-xs font-semibold tracking-[0.18em] text-amber-200/70 uppercase">
           Contacto
         </p>
         <h1 className="mt-1 text-2xl font-semibold text-zinc-50">Hablemos</h1>

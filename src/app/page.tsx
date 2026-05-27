@@ -8,8 +8,6 @@ export default function Home() {
       artistName="INSIGNE CORPUS"
       subtitle="Tattoo Artist Profesional"
       backgroundImageUrl="/brand/leandro-hero.png"
-      backgroundVideoUrl="/brand/hero-video.mp4"
-      wordmarkSrc="/brand/wordmark-insigne.png"
     />
   );
 }

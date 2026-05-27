@@ -13,15 +13,15 @@ export function QuoteThanksStep() {
   return (
     <QuoteShell>
       <section className="relative mx-auto max-w-3xl">
-        <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-fuchsia-600/20 blur-[80px]" />
-        <div className="pointer-events-none absolute -right-10 bottom-0 h-44 w-44 rounded-full bg-violet-600/20 blur-[80px]" />
+        <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-orange-600/20 blur-[80px]" />
+        <div className="pointer-events-none absolute -right-10 bottom-0 h-44 w-44 rounded-full bg-amber-700/20 blur-[80px]" />
 
-        <article className="glass-card relative overflow-hidden rounded-3xl border border-violet-400/20 p-6 text-center md:p-8">
+        <article className="glass-card relative overflow-hidden rounded-3xl border border-amber-500/20 p-6 text-center md:p-8">
           <div className="absolute inset-0 bg-[radial-gradient(520px_220px_at_50%_0%,rgba(217,70,239,0.16),transparent_65%)]" />
 
           <div className="relative z-10">
-            <p className="typo-tech inline-flex items-center gap-2 uppercase tracking-[0.16em] text-violet-200/90">
-              <Heart className="h-4 w-4 text-fuchsia-300" />
+            <p className="typo-tech inline-flex items-center gap-2 uppercase tracking-[0.16em] text-amber-200/90">
+              <Heart className="h-4 w-4 text-amber-300" />
               {t("quoteThanksTag")}
             </p>
 
@@ -37,7 +37,7 @@ export function QuoteThanksStep() {
                 href={BRAND.instagram.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-fuchsia-400/35 bg-gradient-to-r from-fuchsia-600 to-violet-600 px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(217,70,239,0.45)]"
+                className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-orange-400/35 bg-gradient-to-r from-orange-600 to-orange-600 px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(234,88,12,0.45)]"
               >
                 <span className="relative h-6 w-6 overflow-hidden rounded-full">
                   <Image

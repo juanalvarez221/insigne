@@ -48,7 +48,7 @@ export function SideNav() {
                   className={cn(
                     "group flex items-center gap-3 rounded-2xl border px-3 py-2.5 text-sm font-semibold transition",
                     active
-                      ? "border-violet-500/30 bg-violet-600/10 text-violet-100"
+                      ? "border-amber-600/30 bg-amber-700/10 text-amber-50"
                       : "border-transparent bg-transparent text-zinc-200 hover:border-white/10 hover:bg-white/5",
                   )}
                 >
@@ -56,7 +56,7 @@ export function SideNav() {
                     className={cn(
                       "flex h-9 w-9 items-center justify-center rounded-xl border transition",
                       active
-                        ? "border-violet-500/30 bg-violet-600/15"
+                        ? "border-amber-600/30 bg-amber-700/15"
                         : "border-white/10 bg-white/5 group-hover:bg-white/7",
                     )}
                   >
@@ -70,7 +70,7 @@ export function SideNav() {
 
           <div className="mt-auto pt-6">
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-xs font-semibold tracking-[0.18em] text-violet-200/70 uppercase">
+              <p className="text-xs font-semibold tracking-[0.18em] text-amber-200/70 uppercase">
                 Estilo
               </p>
               <p className="mt-1 text-sm font-semibold text-zinc-50">
