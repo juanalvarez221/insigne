@@ -6,15 +6,14 @@ import Image from "next/image";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 import { BRAND } from "@/shared/config/brand";
 
+/** Proyectos reales de Leandro / Insigne Corpus (orden del portafolio) */
 const REELS = [
-  { kind: "video", src: "/reels/insigne-reel-1.mp4" },
-  { kind: "video", src: "/reels/insigne-reel-2.mp4" },
-  { kind: "video", src: "/reels/insigne-reel-3.mp4" },
-  { kind: "video", src: "/reels/insigne-reel-4.mp4" },
-  { kind: "video", src: "/reels/insigne-reel-5.mp4" },
-  { kind: "video", src: "/reels/insigne-reel-6.mp4" },
-  { kind: "video", src: "/reels/insigne-estudio.mp4" },
-  { kind: "video", src: "/reels/insigne-proceso.mp4" },
+  { kind: "video", src: "/reels/proyecto-1.mp4" },
+  { kind: "video", src: "/reels/proyecto-2.mp4" },
+  { kind: "video", src: "/reels/proyecto-3.mp4" },
+  { kind: "video", src: "/reels/proyecto-4.mp4" },
+  { kind: "video", src: "/reels/proyecto-5.mp4" },
+  { kind: "video", src: "/reels/proyecto-6.mp4" },
 ] as const;
 
 export function ProjectsCarousel() {
