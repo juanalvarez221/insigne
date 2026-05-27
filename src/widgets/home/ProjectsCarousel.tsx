@@ -1,57 +1,64 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 import { BRAND } from "@/shared/config/brand";
+import { HorizontalCarousel, useCarouselIndex } from "@/shared/ui/HorizontalCarousel";
 
-/** Proyectos reales de Leandro / Insigne Corpus (orden del portafolio) */
 const REELS = [
-  { kind: "video", src: "/reels/proyecto-1.mp4" },
-  { kind: "video", src: "/reels/proyecto-2.mp4" },
-  { kind: "video", src: "/reels/proyecto-3.mp4" },
-  { kind: "video", src: "/reels/proyecto-4.mp4" },
-  { kind: "video", src: "/reels/proyecto-5.mp4" },
-  { kind: "video", src: "/reels/proyecto-6.mp4" },
-] as const;
+  { kind: "video" as const, src: "/reels/proyecto-1.mp4" },
+  { kind: "video" as const, src: "/reels/proyecto-2.mp4" },
+  { kind: "video" as const, src: "/reels/proyecto-3.mp4" },
+  { kind: "video" as const, src: "/reels/proyecto-4.mp4" },
+  { kind: "video" as const, src: "/reels/proyecto-5.mp4" },
+  { kind: "video" as const, src: "/reels/proyecto-6.mp4" },
+];
+
+function ProjectSlide({ src, index, title }: { src: string; index: number; title: string }) {
+  const activeIndex = useCarouselIndex();
+  const isActive = activeIndex === index;
+
+  return (
+    <article className="carousel-slide relative w-[min(88vw,22rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] sm:w-[min(62vw,20rem)] md:w-[min(44vw,18rem)] lg:w-[min(30vw,16rem)]">
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+      <div className="relative aspect-[9/16] max-h-[74dvh] md:max-h-[80dvh]">
+        <ProjectVideo src={src} title={title} isActive={isActive} />
+      </div>
+    </article>
+  );
+}
+
+function ProjectVideo({ src, title, isActive }: { src: string; title: string; isActive: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (isActive) {
+      void video.play().catch(() => undefined);
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={ref}
+      title={title}
+      src={src}
+      className="pointer-events-none h-full w-full select-none object-cover"
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      disablePictureInPicture
+    />
+  );
+}
 
 export function ProjectsCarousel() {
   const { t } = useSiteLanguage();
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [isInteracting, setIsInteracting] = useState(false);
-  // Mantener loop continuo con menor carga de decodificación simultánea.
-  const reelTrack = [...REELS, ...REELS];
-
-  useEffect(() => {
-    const node = scrollerRef.current;
-    if (!node) return;
-
-    let frameId = 0;
-    const speedPxPerSecond = 34;
-    let current = node.scrollLeft;
-    let last = performance.now();
-
-    const tick = () => {
-      const limit = node.scrollWidth / 2;
-      if (!isInteracting) {
-        const now = performance.now();
-        const deltaSeconds = (now - last) / 1000;
-        last = now;
-
-        current += speedPxPerSecond * deltaSeconds;
-        if (limit > 0 && current >= limit) current -= limit;
-        node.scrollLeft = current;
-      } else {
-        current = node.scrollLeft;
-        last = performance.now();
-      }
-      frameId = window.requestAnimationFrame(tick);
-    };
-
-    frameId = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frameId);
-  }, [isInteracting]);
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/65 p-5 md:p-8">
@@ -61,76 +68,37 @@ export function ProjectsCarousel() {
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-200/80">
           {t("projectsTag")}
         </p>
-        <h3 className="typo-section mt-2 text-[2rem] md:text-[2.5rem]">
-          {t("projectsTitle")}
-        </h3>
-        <p className="typo-body mt-3 max-w-3xl">
-          {t("projectsBody")}
-        </p>
+        <h3 className="typo-section mt-2 text-[2rem] md:text-[2.5rem]">{t("projectsTitle")}</h3>
+        <p className="typo-body mt-3 max-w-3xl">{t("projectsBody")}</p>
       </div>
 
-      <div
-        ref={scrollerRef}
-        className="relative mt-6 overflow-x-auto rounded-3xl border border-white/10 bg-black/45 p-3 [scrollbar-width:none] touch-pan-x [&::-webkit-scrollbar]:hidden"
-        onMouseDown={() => setIsInteracting(true)}
-        onMouseUp={() => setIsInteracting(false)}
-        onMouseLeave={() => setIsInteracting(false)}
-        onTouchStart={() => setIsInteracting(true)}
-        onTouchEnd={() => setIsInteracting(false)}
-        onTouchCancel={() => setIsInteracting(false)}
+      <HorizontalCarousel
+        itemCount={REELS.length}
+        ariaLabel={t("projectsTitle")}
+        autoPlayMs={7000}
+        className="relative z-10 mt-6"
+        viewportClassName="rounded-3xl border border-white/10 bg-black/45 p-3"
       >
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 bg-gradient-to-r from-black/85 to-transparent md:w-16" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 bg-gradient-to-l from-black/85 to-transparent md:w-16" />
-
-        <div className="flex w-max transform-gpu gap-4 will-change-transform">
-          {reelTrack.map((reel, i) => (
-            <article
-              key={`${reel.src}-${i}`}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)]"
-            >
-              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-              <div className="relative h-[74dvh] w-[82vw] sm:w-[62vw] md:h-[80dvh] md:w-[44vw] lg:w-[30vw]">
-                {reel.kind === "video" ? (
-                  <video
-                    title={`Reel ${i + 1} de ${BRAND.shortName}`}
-                    src={reel.src}
-                    className="pointer-events-none h-full w-full select-none object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    disablePictureInPicture
-                  />
-                ) : (
-                  <Image
-                    src={reel.src}
-                    alt={`Proyecto ${i + 1} de ${BRAND.shortName}`}
-                    fill
-                    quality={92}
-                    sizes="(max-width: 640px) 82vw, (max-width: 1024px) 44vw, 30vw"
-                    className="pointer-events-none h-full w-full select-none object-cover"
-                    draggable={false}
-                  />
-                )}
-              </div>
-            </article>
+        <div className="carousel-track flex w-max gap-4">
+          {REELS.map((reel, i) => (
+            <ProjectSlide
+              key={reel.src}
+              src={reel.src}
+              index={i}
+              title={`Proyecto ${i + 1} — ${BRAND.shortName}`}
+            />
           ))}
         </div>
-      </div>
+      </HorizontalCarousel>
 
       <div className="relative mt-6 overflow-hidden rounded-2xl border border-amber-500/20 bg-[radial-gradient(560px_220px_at_8%_0%,rgba(251,146,60,0.24),transparent_62%),linear-gradient(180deg,rgba(255,255,255,0.06),transparent_30%),#0d0d10] p-5 md:p-6">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_180px_at_100%_100%,rgba(124,58,237,0.18),transparent_64%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_180px_at_100%_100%,rgba(180,83,9,0.16),transparent_64%)]" />
         <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-200/80">
             {t("projectsCtaTag")}
           </p>
-          <h4 className="typo-section mt-2 text-[1.6rem] md:text-[2rem]">
-            {t("projectsCtaTitle")}
-          </h4>
-          <p className="typo-body mt-3 max-w-2xl">
-            {t("projectsCtaBody")}
-          </p>
+          <h4 className="typo-section mt-2 text-[1.6rem] md:text-[2rem]">{t("projectsCtaTitle")}</h4>
+          <p className="typo-body mt-3 max-w-2xl">{t("projectsCtaBody")}</p>
 
           <div className="mt-4 grid gap-2 sm:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
@@ -163,4 +131,3 @@ export function ProjectsCarousel() {
     </section>
   );
 }
-

@@ -104,6 +104,12 @@ export const SITE_COPY = {
     quoteThanksWhatsappCta: "Escribirme por WhatsApp",
     quoteThanksDataSaved: "Tus datos basicos quedan guardados para que la siguiente cotizacion sea mas rapida.",
     commonBack: "Anterior",
+    carouselPrev: "Anterior",
+    carouselNext: "Siguiente",
+    carouselPause: "Pausar carrusel",
+    carouselPlay: "Reproducir carrusel",
+    carouselSlide: "Elemento {n} de {total}",
+    carouselHint: "Arrastra o usa las flechas",
   },
   en: {
     languageTitle: "Choose your language",
@@ -204,6 +210,12 @@ export const SITE_COPY = {
     quoteThanksWhatsappCta: "Message me on WhatsApp",
     quoteThanksDataSaved: "Your basic details are saved so your next quote is faster.",
     commonBack: "Back",
+    carouselPrev: "Previous",
+    carouselNext: "Next",
+    carouselPause: "Pause carousel",
+    carouselPlay: "Play carousel",
+    carouselSlide: "Item {n} of {total}",
+    carouselHint: "Drag or use arrows",
   },
 } as const;
 
