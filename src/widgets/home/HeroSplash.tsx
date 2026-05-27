@@ -93,7 +93,7 @@ export function HeroSplash({
                 <div className="hero-cinematic__media">
                   <Image
                     src={currentHeroImage}
-                    alt={`${artistName} — retrato profesional`}
+                    alt={t("introPhoto1Alt")}
                     fill
                     priority
                     quality={100}
@@ -197,6 +197,7 @@ export function HeroSplash({
             <h2 className="typo-section mt-2 max-w-4xl">{t("identityTitle")}</h2>
             <p className="typo-body mt-3 max-w-3xl text-zinc-300">{t("identityP1")}</p>
             <p className="typo-body mt-3 max-w-3xl text-zinc-400">{t("identityP2")}</p>
+            <p className="typo-body mt-2 max-w-3xl text-zinc-500">{t("identityP3")}</p>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-amber-600/20 bg-amber-950/30 p-4">

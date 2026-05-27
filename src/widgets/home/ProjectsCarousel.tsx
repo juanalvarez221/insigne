@@ -56,7 +56,7 @@ export function ProjectsCarousel() {
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/65 p-5 md:p-8">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(500px_220px_at_15%_0%,rgba(251,146,60,0.28),transparent_58%),radial-gradient(700px_280px_at_95%_100%,rgba(124,58,237,0.2),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(500px_220px_at_15%_0%,rgba(251,146,60,0.28),transparent_58%),radial-gradient(700px_280px_at_95%_100%,rgba(180,83,9,0.18),transparent_60%)]" />
 
       <div className="relative z-10">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-200/80">
@@ -135,13 +135,13 @@ export function ProjectsCarousel() {
 
           <div className="mt-4 grid gap-2 sm:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <p className="typo-tech text-zinc-200">Estimación por sesiones</p>
+              <p className="typo-tech text-zinc-200">{t("projectsPill1")}</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <p className="typo-tech text-zinc-200">Rango de inversión claro</p>
+              <p className="typo-tech text-zinc-200">{t("projectsPill2")}</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-              <p className="typo-tech text-zinc-200">Respuesta personalizada</p>
+              <p className="typo-tech text-zinc-200">{t("projectsPill3")}</p>
             </div>
           </div>
 

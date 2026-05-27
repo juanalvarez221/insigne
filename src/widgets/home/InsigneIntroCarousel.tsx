@@ -12,13 +12,13 @@ export function InsigneIntroCarousel() {
   const photos = [
     {
       src: "/brand/leandro-hero.png",
-      alt: "Leandro — pasión por las motos",
+      alt: t("introPhoto1Alt"),
       title: t("introPhoto1Title"),
       caption: t("introPhoto1Caption"),
     },
     {
       src: "/brand/leandro-tatuando.png",
-      alt: "Leandro tatuando en Insigne Corpus",
+      alt: t("introPhoto2Alt"),
       title: t("introPhoto2Title"),
       caption: t("introPhoto2Caption"),
     },
