@@ -45,8 +45,8 @@ export function HeroSplash({
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -72]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -48]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.02]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 0.94, 0.72]);
   const heroBlur = useTransform(scrollYProgress, [0, 1], [0, 2.4]);
   const heroFilter = useMotionTemplate`blur(${heroBlur}px)`;
@@ -78,33 +78,37 @@ export function HeroSplash({
           className="sticky top-0 h-[100dvh] overflow-hidden"
           style={{ y: imageY, scale: imageScale, opacity: heroOpacity, filter: heroFilter }}
         >
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="hero-cinematic__backdrop absolute inset-0" aria-hidden />
+
+          <div className="hero-cinematic__stage">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentHeroImage}
-                initial={{ opacity: 0, scale: 1.03 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className="hero-cinematic__media absolute inset-[-4%] h-[108%] w-[108%]"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="hero-cinematic__frame"
               >
-                <Image
-                  src={currentHeroImage}
-                  alt={`${artistName} — retrato profesional`}
-                  fill
-                  priority
-                  quality={100}
-                  sizes="100vw"
-                  className="object-cover object-[center_22%] brightness-[0.92] contrast-[1.08] saturate-[1.05]"
-                />
+                <div className="hero-cinematic__media">
+                  <Image
+                    src={currentHeroImage}
+                    alt={`${artistName} — retrato profesional`}
+                    fill
+                    priority
+                    quality={100}
+                    sizes="(max-width: 768px) 100vw, 72rem"
+                    className="hero-cinematic__photo"
+                  />
+                </div>
+                <div className="hero-cinematic__vignette absolute inset-0 z-[1]" aria-hidden />
               </motion.div>
             </AnimatePresence>
           </div>
 
-          <div className="hero-cinematic__grade absolute inset-0 z-[1]" />
-          <div className="hero-cinematic__rays absolute inset-0 z-[1]" />
-          <div className="hero-cinematic__grain absolute inset-0 z-[2]" />
-          <div className="absolute inset-0 z-[2] shadow-[inset_0_0_160px_48px_rgba(0,0,0,0.88)]" />
+          <div className="hero-cinematic__grade absolute inset-0 z-[3]" />
+          <div className="hero-cinematic__rays absolute inset-0 z-[3]" />
+          <div className="hero-cinematic__grain absolute inset-0 z-[4]" />
         </motion.div>
 
         <div className="absolute inset-0 z-[4] flex h-[100dvh] w-full flex-col items-center justify-end px-6 pb-16 text-center md:pb-14">

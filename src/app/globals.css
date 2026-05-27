@@ -80,7 +80,7 @@ body {
     transform: scale(1) translate3d(0, 0, 0);
   }
   100% {
-    transform: scale(1.1) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.035) translate3d(0, -0.5%, 0);
   }
 }
 
@@ -260,16 +260,72 @@ body {
 }
 
 /* Hero cinematic photo treatment */
+.hero-cinematic__backdrop {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 38%, rgba(180, 83, 9, 0.22), transparent 68%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(251, 146, 60, 0.12), transparent 62%),
+    #080605;
+}
+
+.hero-cinematic__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  padding-bottom: clamp(11rem, 28vh, 15rem);
+}
+
+.hero-cinematic__frame {
+  position: relative;
+  width: min(100%, 72rem);
+  height: min(68dvh, 52rem);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(251, 191, 36, 0.12);
+  box-shadow:
+    0 28px 80px -24px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 60px -12px rgba(234, 88, 12, 0.18);
+}
+
 .hero-cinematic__media {
-  animation: heroKenBurns 22s ease-in-out infinite alternate;
+  position: absolute;
+  inset: 0;
+  animation: heroKenBurns 24s ease-in-out infinite alternate;
+}
+
+.hero-cinematic__photo {
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0.96) contrast(1.06) saturate(1.04);
 }
 
 .hero-cinematic__grade {
   background:
-    linear-gradient(180deg, rgba(8, 6, 5, 0.15) 0%, rgba(8, 6, 5, 0.55) 55%, rgba(8, 6, 5, 0.94) 100%),
-    radial-gradient(900px 500px at 72% 18%, rgba(251, 146, 60, 0.28), transparent 58%),
-    radial-gradient(700px 400px at 12% 30%, rgba(180, 83, 9, 0.2), transparent 62%),
-    linear-gradient(125deg, rgba(120, 53, 15, 0.35), transparent 45%);
+    linear-gradient(
+      180deg,
+      rgba(8, 6, 5, 0.08) 0%,
+      transparent 38%,
+      transparent 52%,
+      rgba(8, 6, 5, 0.72) 78%,
+      rgba(8, 6, 5, 0.96) 100%
+    ),
+    radial-gradient(ellipse 85% 55% at 50% 42%, transparent 42%, rgba(8, 6, 5, 0.35) 100%),
+    radial-gradient(700px 380px at 78% 22%, rgba(251, 146, 60, 0.2), transparent 58%),
+    radial-gradient(560px 320px at 18% 28%, rgba(180, 83, 9, 0.14), transparent 62%);
+  pointer-events: none;
+}
+
+.hero-cinematic__vignette {
+  background: radial-gradient(
+    ellipse 92% 88% at 50% 46%,
+    transparent 52%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+  pointer-events: none;
 }
 
 .hero-cinematic__rays {
