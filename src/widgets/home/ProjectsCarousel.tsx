@@ -4,22 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
+import { BRAND } from "@/shared/config/brand";
 
 const REELS = [
-  { kind: "video", src: "/reels/reel-DTlrOHUCbNq.mp4" },
-  { kind: "image", src: "/reels/shot-1.jpg" },
-  { kind: "video", src: "/reels/reel-DRCx8l4jTDd.mp4" },
-  { kind: "image", src: "/reels/shot-2.jpg" },
-  { kind: "video", src: "/reels/reel-saveclip-1.mp4" },
-  { kind: "image", src: "/reels/shot-3.jpg" },
-  { kind: "video", src: "/reels/reel-saveclip-2.mp4" },
-  { kind: "image", src: "/reels/shot-4.jpg" },
-  { kind: "video", src: "/reels/reel-saveclip-3.mp4" },
-  { kind: "image", src: "/reels/shot-5.jpg" },
-  { kind: "video", src: "/reels/reel-saveclip-4.mp4" },
-  { kind: "image", src: "/reels/shot-6.jpg" },
-  { kind: "image", src: "/reels/shot-7.jpg" },
-  { kind: "image", src: "/reels/shot-8.jpg" },
+  { kind: "video", src: "/reels/insigne-reel-1.mp4" },
+  { kind: "video", src: "/reels/insigne-reel-2.mp4" },
+  { kind: "video", src: "/reels/insigne-reel-3.mp4" },
+  { kind: "video", src: "/reels/insigne-reel-4.mp4" },
+  { kind: "video", src: "/reels/insigne-reel-5.mp4" },
+  { kind: "video", src: "/reels/insigne-reel-6.mp4" },
+  { kind: "video", src: "/reels/insigne-estudio.mp4" },
+  { kind: "video", src: "/reels/insigne-proceso.mp4" },
 ] as const;
 
 export function ProjectsCarousel() {
@@ -98,7 +93,7 @@ export function ProjectsCarousel() {
               <div className="relative h-[74dvh] w-[82vw] sm:w-[62vw] md:h-[80dvh] md:w-[44vw] lg:w-[30vw]">
                 {reel.kind === "video" ? (
                   <video
-                    title={`Reel ${i + 1} de Malianteo`}
+                    title={`Reel ${i + 1} de ${BRAND.shortName}`}
                     src={reel.src}
                     className="pointer-events-none h-full w-full select-none object-cover"
                     autoPlay
@@ -111,7 +106,7 @@ export function ProjectsCarousel() {
                 ) : (
                   <Image
                     src={reel.src}
-                    alt={`Proyecto ${i + 1} de Malianteo`}
+                    alt={`Proyecto ${i + 1} de ${BRAND.shortName}`}
                     fill
                     quality={92}
                     sizes="(max-width: 640px) 82vw, (max-width: 1024px) 44vw, 30vw"

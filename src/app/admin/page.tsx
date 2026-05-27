@@ -1,5 +1,5 @@
-import { MalianteoAdminDashboard } from "@/widgets/admin/MalianteoAdminDashboard";
+import { InsigneAdminDashboard } from "@/widgets/admin/MalianteoAdminDashboard";
 
 export default function AdminPage() {
-  return <MalianteoAdminDashboard />;
+  return <InsigneAdminDashboard />;
 }

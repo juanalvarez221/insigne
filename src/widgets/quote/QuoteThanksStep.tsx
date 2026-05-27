@@ -5,12 +5,13 @@ import Link from "next/link";
 import { ExternalLink, Heart } from "lucide-react";
 import { QuoteShell } from "@/widgets/quote/QuoteShell";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
+import { BRAND, whatsappUrl } from "@/shared/config/brand";
 
 export function QuoteThanksStep() {
   const { t } = useSiteLanguage();
 
   return (
-    <QuoteShell brand="MALIANTEO">
+    <QuoteShell>
       <section className="relative mx-auto max-w-3xl">
         <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-fuchsia-600/20 blur-[80px]" />
         <div className="pointer-events-none absolute -right-10 bottom-0 h-44 w-44 rounded-full bg-violet-600/20 blur-[80px]" />
@@ -33,7 +34,7 @@ export function QuoteThanksStep() {
 
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
               <a
-                href="https://www.instagram.com/malianteo_ink/"
+                href={BRAND.instagram.url}
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-fuchsia-400/35 bg-gradient-to-r from-fuchsia-600 to-violet-600 px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(217,70,239,0.45)]"
@@ -58,7 +59,7 @@ export function QuoteThanksStep() {
               </Link>
 
               <a
-                href="https://wa.me/573104798643?text=Hola%20Malianteo%2C%20quiero%20seguir%20con%20mi%20proceso."
+                href={whatsappUrl(BRAND.whatsapp.thanksMessage)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/35 bg-emerald-500/15 px-5 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-emerald-100 transition hover:bg-emerald-500/20"

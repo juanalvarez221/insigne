@@ -6,10 +6,11 @@ import { MoreVertical, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { getFirstName } from "@/shared/lib/quoteProfile";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
+import { BRAND } from "@/shared/config/brand";
 
 export function QuoteShell({
   children,
-  brand = "MALIANTEO",
+  brand = BRAND.name,
 }: {
   children: React.ReactNode;
   brand?: string;

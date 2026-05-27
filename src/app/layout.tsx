@@ -23,8 +23,8 @@ const fontMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Malianteo Ink — Tattoo Artist",
-  description: "Prototipo UI (no funcional) para Malianteo / Malianteo_Ink.",
+  title: "Insigne Corpus — Tattoo Artist",
+  description: "Insigne Corpus Studio — Leandro. Cotizacion y portafolio profesional.",
 };
 
 export default function RootLayout({

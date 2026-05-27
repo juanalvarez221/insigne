@@ -12,8 +12,9 @@ import {
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { ProjectsCarousel } from "@/widgets/home/ProjectsCarousel";
-import { MalianteoIntroCarousel } from "@/widgets/home/MalianteoIntroCarousel";
+import { InsigneIntroCarousel } from "@/widgets/home/InsigneIntroCarousel";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
+import { BRAND, whatsappUrl } from "@/shared/config/brand";
 
 type HeroSplashProps = {
   backgroundImageUrl: string;
@@ -224,7 +225,7 @@ export function HeroSplash({
             <h2 className="typo-section mt-2 max-w-4xl">{t("identityTitle")}</h2>
             <p className="typo-body mt-3 max-w-3xl text-zinc-200">{t("identityP1")}</p>
 
-            <MalianteoIntroCarousel />
+            <InsigneIntroCarousel />
           </div>
         </div>
 
@@ -243,10 +244,10 @@ export function HeroSplash({
         aria-label="Accesos rapidos sociales"
       >
         <motion.a
-          href="https://www.instagram.com/malianteo_ink/"
+          href={BRAND.instagram.url}
           target="_blank"
           rel="noreferrer"
-          aria-label="Ir al Instagram de Malianteo"
+          aria-label={`Ir al Instagram de ${BRAND.shortName}`}
           animate={{ y: [0, -3, 0], scale: [1, 1.02, 1] }}
           transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ y: -4, scale: 1.05 }}
@@ -285,10 +286,10 @@ export function HeroSplash({
         </motion.a>
 
         <motion.a
-          href="https://wa.me/573104798643?text=Hola%20Malianteo%2C%20quiero%20continuar%20mi%20cotizacion."
+          href={whatsappUrl(BRAND.whatsapp.quoteMessage)}
           target="_blank"
           rel="noreferrer"
-          aria-label="Hablar por WhatsApp con Malianteo"
+          aria-label={`Hablar por WhatsApp con ${BRAND.shortName}`}
           animate={{ y: [0, -3, 0], scale: [1, 1.02, 1] }}
           transition={{ duration: 3.2, delay: 0.45, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ y: -4, scale: 1.05 }}

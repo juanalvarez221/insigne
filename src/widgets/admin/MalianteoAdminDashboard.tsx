@@ -110,7 +110,7 @@ function estimateImageCard(
 
   ctx.fillStyle = "#ffffff";
   ctx.font = "700 58px Inter, sans-serif";
-  ctx.fillText("MALIANTEO INK", 70, 120);
+  ctx.fillText("INSIGNE CORPUS", 70, 120);
 
   ctx.fillStyle = "#c4b5fd";
   ctx.font = "600 36px Inter, sans-serif";
@@ -165,7 +165,7 @@ async function shareImageIfPossible(dataUrl: string, filename: string, text: str
     navigator.canShare?.({ files: [file] })
   ) {
     await navigator.share({
-      title: "Cotizacion Malianteo Ink",
+      title: "Cotizacion Insigne Corpus",
       text,
       files: [file],
     });
@@ -179,7 +179,7 @@ async function shareImageIfPossible(dataUrl: string, filename: string, text: str
   return false;
 }
 
-export function MalianteoAdminDashboard() {
+export function InsigneAdminDashboard() {
   const [quotes, setQuotes] = useState<SmartQuoteRequest[]>(() =>
     getSmartQuoteRequests(),
   );
@@ -294,7 +294,7 @@ export function MalianteoAdminDashboard() {
     });
     persistAndSetQuotes(next);
 
-    const shortMessage = `Hola ${quote.clientName}, espero que estes muy bien. Te comparto tu cotizacion profesional de Malianteo Ink: ${sessionsCount} sesiones aprox con un valor de ${money.format(sessionPrice)} por sesion (total ${money.format(total)}). Quedo atento para agendarte con toda la energia.`;
+    const shortMessage = `Hola ${quote.clientName}, espero que estes muy bien. Te comparto tu cotizacion profesional de Insigne Corpus: ${sessionsCount} sesiones aprox con un valor de ${money.format(sessionPrice)} por sesion (total ${money.format(total)}). Quedo atento para agendarte con toda la energia.`;
 
     const card = estimateImageCard(quote, sessionPrice, sessionsCount, total);
     if (card) {
@@ -416,7 +416,7 @@ export function MalianteoAdminDashboard() {
               Vista Admin
             </p>
             <h1 className="mt-1 text-2xl font-semibold text-zinc-50 sm:text-3xl">
-              Malianteo Dash
+              Insigne Dash
             </h1>
             <p className="mt-2 text-sm text-zinc-300">
               Gestiona cotizaciones, flujo creativo del iPad y operación diaria

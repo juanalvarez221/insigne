@@ -2,7 +2,7 @@
 
 export type SiteLanguage = "es" | "en";
 
-export const LANGUAGE_STORAGE_KEY = "malianteo.language";
+export const LANGUAGE_STORAGE_KEY = "insigne.language";
 
 export const SITE_COPY = {
   es: {
@@ -16,7 +16,7 @@ export const SITE_COPY = {
     identityTag: "Identidad",
     identityTitle: "Vision clara, arte con caracter",
     identityP1:
-      "Soy Malianteo. Diseno cada pieza desde cero, con tecnica limpia, composicion precisa y una estetica oscura que se siente autentica.",
+      "Soy Leandro, de Insigne Corpus. Diseno cada pieza desde cero, con tecnica limpia, composicion precisa y una estetica que se siente autentica.",
     identityP2:
       "Cada proyecto lo construyo desde cero: leo tu historia, defino composicion y llevo el detalle al nivel que la pieza merece.",
     identityP3:
@@ -68,7 +68,7 @@ export const SITE_COPY = {
     quoteSummaryTag: "Mi estimado inicial",
     quoteSummaryTitle: "Esto es lo que proyecte para tu pieza",
     quoteSummaryBody:
-      "Te comparto un estimado profesional para orientarte. La cotizacion oficial final te la envio yo, Malianteo, despues de revisar cada detalle.",
+      "Te comparto un estimado profesional para orientarte. La cotizacion oficial final te la envio yo, Leandro, despues de revisar cada detalle.",
     quoteActionTitle: "Sigamos con tu propuesta oficial",
     quoteActionBody:
       "Si te hace sentido este estimado, activa el proceso y en las proximas horas te envio por WhatsApp mi propuesta oficial, clara y ajustada a tu proyecto.",
@@ -80,7 +80,7 @@ export const SITE_COPY = {
     quoteThanksTitle: "Recibi tu solicitud y ya la estoy preparando",
     quoteThanksBody:
       "Gracias por confiar en mi trabajo. En las proximas horas te envio por WhatsApp mi cotizacion oficial, presentada con el enfoque de tu idea.",
-    quoteThanksInstagramCta: "Seguir a Malianteo en Instagram",
+    quoteThanksInstagramCta: "Seguir a Insigne en Instagram",
     quoteThanksNewQuoteCta: "Realizar otra cotizacion",
     quoteThanksWhatsappCta: "Escribirme por WhatsApp",
     quoteThanksDataSaved: "Tus datos basicos quedan guardados para que la siguiente cotizacion sea mas rapida.",
@@ -97,7 +97,7 @@ export const SITE_COPY = {
     identityTag: "Identity",
     identityTitle: "Clear vision, art with character",
     identityP1:
-      "I am Malianteo. I design every piece from scratch with clean technique, precise composition, and a dark aesthetic that feels authentic.",
+      "I am Leandro, from Insigne Corpus. I design every piece from scratch with clean technique, precise composition, and an aesthetic that feels authentic.",
     identityP2:
       "Every project starts from zero: I read your story, define composition, and push detail to the level your piece deserves.",
     identityP3:
@@ -148,7 +148,7 @@ export const SITE_COPY = {
     quoteSummaryTag: "My initial estimate",
     quoteSummaryTitle: "This is my projection for your piece",
     quoteSummaryBody:
-      "I am sharing a professional estimate to guide you. Your final official quote will be sent by me, Malianteo, after I review the full detail.",
+      "I am sharing a professional estimate to guide you. Your final official quote will be sent by me, Leandro, after I review the full detail.",
     quoteActionTitle: "Let's move to your official proposal",
     quoteActionBody:
       "If this estimate feels right to you, activate the process and within the next few hours I will send your official WhatsApp proposal, fully tailored to your project.",
@@ -160,7 +160,7 @@ export const SITE_COPY = {
     quoteThanksTitle: "I received your request and I am preparing it",
     quoteThanksBody:
       "Thank you for trusting my work. In the next few hours, I will send your official quote to your WhatsApp with your project's direction.",
-    quoteThanksInstagramCta: "Follow Malianteo on Instagram",
+    quoteThanksInstagramCta: "Follow Insigne on Instagram",
     quoteThanksNewQuoteCta: "Create another quote",
     quoteThanksWhatsappCta: "Message me on WhatsApp",
     quoteThanksDataSaved: "Your basic details are saved so your next quote is faster.",

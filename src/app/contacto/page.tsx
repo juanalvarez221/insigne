@@ -1,6 +1,7 @@
 import { AppShell } from "@/widgets/layout/AppShell";
 import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
+import { BRAND, whatsappUrl } from "@/shared/config/brand";
 
 export default function ContactoPage() {
   return (
@@ -22,7 +23,7 @@ export default function ContactoPage() {
             <div className="mt-3">
               <Button
                 className="w-full"
-                href="https://wa.me/573104798643?text=Hola%20Malianteo%2C%20quiero%20continuar%20mi%20cotizacion."
+                href={whatsappUrl(BRAND.whatsapp.quoteMessage)}
               >
                 Continuar por WhatsApp
               </Button>
@@ -33,11 +34,11 @@ export default function ContactoPage() {
         <Card>
           <div className="p-4">
             <p className="text-sm font-semibold text-zinc-50">Instagram</p>
-            <p className="mt-1 text-xs text-zinc-400">@malianteo_ink</p>
+            <p className="mt-1 text-xs text-zinc-400">@{BRAND.instagram.handle}</p>
             <div className="mt-3">
               <Button
                 className="w-full"
-                href="https://www.instagram.com/malianteo_ink/"
+                href={BRAND.instagram.url}
               >
                 Abrir Instagram
               </Button>
@@ -48,7 +49,7 @@ export default function ContactoPage() {
         <Card>
           <div className="p-4">
             <p className="text-sm font-semibold text-zinc-50">Ubicación</p>
-            <p className="mt-1 text-xs text-zinc-400">Medellín, Colombia</p>
+            <p className="mt-1 text-xs text-zinc-400">{BRAND.location}</p>
           </div>
         </Card>
       </div>

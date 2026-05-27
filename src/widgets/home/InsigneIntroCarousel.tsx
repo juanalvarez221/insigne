@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
-export function MalianteoIntroCarousel() {
+export function InsigneIntroCarousel() {
   const { language } = useSiteLanguage();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isInteracting, setIsInteracting] = useState(false);
@@ -12,42 +12,42 @@ export function MalianteoIntroCarousel() {
     language === "en"
       ? [
           {
-            src: "/brand/teo1.png",
-            alt: "Malianteo portrait 1",
+            src: "/brand/leandro-hero.png",
+            alt: "Leandro portrait",
             title: "Real identity",
-            caption: "Dark art, street culture, and visual storytelling.",
+            caption: "Street energy, precision, and visual storytelling.",
           },
           {
-            src: "/brand/teo2.png",
-            alt: "Malianteo portrait 2",
-            title: "Art direction",
-            caption: "Every piece is built with concept, structure, and character.",
+            src: "/brand/wordmark-insigne.png",
+            alt: "Insigne Corpus logo",
+            title: "Insigne Corpus",
+            caption: "Professional tattoo studio with classic character.",
           },
           {
-            src: "/brand/teo3.png",
-            alt: "Malianteo portrait 3",
+            src: "/brand/leandro-tatuando.png",
+            alt: "Leandro tattooing",
             title: "Technique and presence",
-            caption: "Not just tattoos: work that leaves a signature.",
+            caption: "Every piece is built with concept, structure, and detail.",
           },
         ]
       : [
           {
-            src: "/brand/teo1.png",
-            alt: "Malianteo retrato 1",
+            src: "/brand/leandro-hero.png",
+            alt: "Retrato de Leandro",
             title: "Identidad real",
-            caption: "Malianteo fusiona calle, arte oscuro y narrativa visual.",
+            caption: "Leandro fusiona calle, tecnica limpia y narrativa visual.",
           },
           {
-            src: "/brand/teo2.png",
-            alt: "Malianteo retrato 2",
-            title: "Diseno con direccion",
-            caption: "Cada pieza se plantea con concepto, estructura y caracter.",
+            src: "/brand/wordmark-insigne.png",
+            alt: "Logo Insigne Corpus",
+            title: "Insigne Corpus",
+            caption: "Estudio de tatuaje profesional con estetica clasica.",
           },
           {
-            src: "/brand/teo3.png",
-            alt: "Malianteo retrato 3",
+            src: "/brand/leandro-tatuando.png",
+            alt: "Leandro tatuando",
             title: "Tecnica y presencia",
-            caption: "No es solo tatuar: es crear una obra que impone estilo.",
+            caption: "Cada pieza se plantea con concepto, estructura y detalle.",
           },
         ];
   const track = [...photos, ...photos];
@@ -111,4 +111,3 @@ export function MalianteoIntroCarousel() {
     </div>
   );
 }
-

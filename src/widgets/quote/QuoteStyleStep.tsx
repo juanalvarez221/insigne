@@ -10,7 +10,7 @@ const STYLE_OPTIONS = [
   "Realismo oscuro",
   "Surrealismo",
   "Lineas",
-  "Malianteo Style",
+  "Insigne Style",
 ] as const;
 
 export function QuoteStyleStep({ size, zone }: { size: string; zone: string }) {
@@ -21,7 +21,7 @@ export function QuoteStyleStep({ size, zone }: { size: string; zone: string }) {
   );
 
   return (
-    <QuoteShell brand="MALIANTEO">
+    <QuoteShell>
       <section className="relative mb-8">
         <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-violet-600/15 blur-[60px]" />
         <p className="typo-tech mb-2 uppercase tracking-[0.16em] text-violet-200/85">

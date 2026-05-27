@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/shared/lib/cn";
+import { BRAND } from "@/shared/config/brand";
 
 const items = [
   { href: "/", label: "Inicio", icon: Home },
@@ -28,9 +29,9 @@ export function SideNav() {
         <div className="app-surface noise h-full rounded-3xl p-5">
           <div className="flex items-center justify-between">
             <div className="leading-none">
-              <p className="text-display text-5xl">MAL</p>
+              <p className="text-display text-5xl">INS</p>
               <p className="-mt-2 text-xs font-semibold tracking-[0.25em] text-zinc-400 uppercase">
-                Malianteo Ink
+                {BRAND.shortName} Corpus
               </p>
             </div>
             <div className="h-11 w-11 rounded-full border border-white/10 bg-white/5" />
