@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/shared/lib/cn";
+import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 type InsigneWordmarkProps = {
   className?: string;
@@ -9,6 +10,7 @@ type InsigneWordmarkProps = {
 
 /** Wordmark tipográfico Victorian / Circus con textura distressed */
 export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkProps) {
+  const { t } = useSiteLanguage();
   const isHero = size === "hero";
 
   return (
@@ -46,7 +48,7 @@ export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkPro
           isHero ? "text-[0.52rem] md:text-[0.62rem]" : "text-[0.48rem]",
         )}
       >
-        Estudio profesional
+        {t("wordmarkEyebrow")}
       </p>
 
       <h1
@@ -73,7 +75,7 @@ export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkPro
       <div className="wordmark-vintage__ornament mx-auto mt-3 flex items-center justify-center gap-3 opacity-80">
         <span className="h-px w-10 bg-gradient-to-r from-transparent to-amber-600/70 md:w-16" />
         <span className="font-serif text-[0.65rem] uppercase tracking-[0.35em] text-amber-300/60 md:text-xs">
-          Mde
+          {t("wordmarkOrnament")}
         </span>
         <span className="h-px w-10 bg-gradient-to-l from-transparent to-amber-600/70 md:w-16" />
       </div>

@@ -30,7 +30,8 @@ const fontMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: "Insigne Corpus Tattoo — Leandro",
-  description: "Insigne Corpus Studio — Tatuaje profesional. Cotización y portafolio.",
+  description:
+    "Insigne Corpus Tattoo — Leandro. Tatuaje profesional y cultura motera. Cotización y portafolio.",
 };
 
 export default function RootLayout({

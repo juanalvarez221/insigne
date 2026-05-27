@@ -5,39 +5,25 @@ import Image from "next/image";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 
 export function InsigneIntroCarousel() {
-  const { language } = useSiteLanguage();
+  const { t } = useSiteLanguage();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isInteracting, setIsInteracting] = useState(false);
-  const photos =
-    language === "en"
-      ? [
-          {
-            src: "/brand/leandro-hero.png",
-            alt: "Leandro portrait",
-            title: "Real identity",
-            caption: "Street energy, precision, and visual storytelling.",
-          },
-          {
-            src: "/brand/leandro-tatuando.png",
-            alt: "Leandro at Insigne studio",
-            title: "Insigne Corpus Studio",
-            caption: "Professional environment, classic character, real craft.",
-          },
-        ]
-      : [
-          {
-            src: "/brand/leandro-hero.png",
-            alt: "Retrato de Leandro",
-            title: "Identidad real",
-            caption: "Leandro fusiona calle, tecnica limpia y narrativa visual.",
-          },
-          {
-            src: "/brand/leandro-tatuando.png",
-            alt: "Leandro en el estudio Insigne",
-            title: "Estudio Insigne Corpus",
-            caption: "Ambiente profesional, estetica clasica y oficio real.",
-          },
-        ];
+
+  const photos = [
+    {
+      src: "/brand/leandro-hero.png",
+      alt: "Leandro — pasión por las motos",
+      title: t("introPhoto1Title"),
+      caption: t("introPhoto1Caption"),
+    },
+    {
+      src: "/brand/leandro-tatuando.png",
+      alt: "Leandro tatuando en Insigne Corpus",
+      title: t("introPhoto2Title"),
+      caption: t("introPhoto2Caption"),
+    },
+  ];
+
   const track = [...photos, ...photos];
 
   useEffect(() => {
