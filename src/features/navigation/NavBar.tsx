@@ -10,17 +10,20 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/shared/lib/cn";
+import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
+import type { SiteCopyKey } from "@/shared/i18n/siteLanguage";
 
-const items = [
-  { href: "/", label: "Inicio", icon: Home },
-  { href: "/admin", label: "Dash", icon: LayoutDashboard },
-  { href: "/proyectos", label: "Proyectos", icon: ImageIcon },
-  { href: "/cotizacion", label: "Cotizar", icon: Sparkles },
-  { href: "/contacto", label: "Contacto", icon: MessageCircle },
+const items: { href: string; labelKey: SiteCopyKey; icon: typeof Home }[] = [
+  { href: "/", labelKey: "navHome", icon: Home },
+  { href: "/admin", labelKey: "navAdmin", icon: LayoutDashboard },
+  { href: "/proyectos", labelKey: "navProjects", icon: ImageIcon },
+  { href: "/cotizacion", labelKey: "navQuote", icon: Sparkles },
+  { href: "/contacto", labelKey: "navContact", icon: MessageCircle },
 ];
 
 export function NavBar() {
   const pathname = usePathname();
+  const { t } = useSiteLanguage();
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50">
@@ -52,7 +55,7 @@ export function NavBar() {
                       <span className="absolute -bottom-1 h-1 w-6 rounded-full bg-amber-600/70 blur-[0.5px]" />
                     ) : null}
                   </span>
-                  <span className="leading-none">{it.label}</span>
+                  <span className="leading-none">{t(it.labelKey)}</span>
                 </Link>
               );
             })}

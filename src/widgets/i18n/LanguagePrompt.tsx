@@ -10,20 +10,20 @@ export function LanguagePrompt() {
   if (!isReady || !needsSelection) return null;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/72 px-4 backdrop-blur-md">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/75 px-4 backdrop-blur-md">
       <motion.div
         initial={{ opacity: 0, y: 18, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-zinc-950/95 p-6 shadow-[0_28px_70px_-28px_rgba(0,0,0,0.95)]"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(500px_220px_at_12%_0%,rgba(251,146,60,0.3),transparent_62%),radial-gradient(420px_220px_at_100%_100%,rgba(217,70,239,0.22),transparent_65%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(500px_220px_at_12%_0%,rgba(251,146,60,0.28),transparent_62%),radial-gradient(420px_220px_at_100%_100%,rgba(180,83,9,0.18),transparent_65%)]" />
 
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-600/10 px-3 py-1.5">
             <Globe2 className="h-4 w-4 text-amber-200" />
             <p className="typo-tech uppercase tracking-[0.16em] text-amber-200/90">
-              Language
+              {t("languageBadge")}
             </p>
           </div>
 
@@ -41,9 +41,7 @@ export function LanguagePrompt() {
               className="group rounded-2xl border border-amber-500/35 bg-amber-700/15 p-4 text-left transition hover:border-amber-300/55 hover:bg-amber-700/22"
             >
               <p className="text-sm font-semibold text-amber-50">{t("languageEs")}</p>
-              <p className="mt-1 text-xs text-amber-50/75">
-                Experiencia completa en espanol.
-              </p>
+              <p className="mt-1 text-xs text-amber-50/75">{t("languageEsDesc")}</p>
             </motion.button>
 
             <motion.button
@@ -54,15 +52,13 @@ export function LanguagePrompt() {
               className="group rounded-2xl border border-white/15 bg-white/5 p-4 text-left transition hover:border-white/25 hover:bg-white/10"
             >
               <p className="text-sm font-semibold text-zinc-100">{t("languageEn")}</p>
-              <p className="mt-1 text-xs text-zinc-300/80">
-                Full experience in English.
-              </p>
+              <p className="mt-1 text-xs text-zinc-300/80">{t("languageEnDesc")}</p>
             </motion.button>
           </div>
 
           <div className="mt-4 inline-flex items-center gap-2 text-xs text-zinc-400">
             <Sparkles className="h-3.5 w-3.5 text-amber-300/90" />
-            You can change this anytime later.
+            {t("languageChangeNote")}
           </div>
         </div>
       </motion.div>

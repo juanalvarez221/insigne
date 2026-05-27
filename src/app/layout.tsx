@@ -29,9 +29,15 @@ const fontMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Insigne Corpus Tattoo — Leandro",
+  title: "Insigne Corpus Tattoo — Leandro | Realismo Itagüí",
   description:
-    "Insigne Corpus Tattoo — Leandro. Tatuaje profesional y cultura motera. Cotización y portafolio.",
+    "Leandro, tatuador en Itagüí (Medellín). Realismo en sombras, black & grey y piezas a medida en Insigne Corpus Tattoo. Cotiza por WhatsApp.",
+  openGraph: {
+    title: "Insigne Corpus Tattoo — Leandro",
+    description:
+      "Realismo, mangas completas y tatuaje de autor. Estudio privado en Itagüí. Cotiza tu idea con Leandro.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

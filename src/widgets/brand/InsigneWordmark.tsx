@@ -6,12 +6,19 @@ import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 type InsigneWordmarkProps = {
   className?: string;
   size?: "hero" | "compact";
+  /** Banner: solo nombre de marca */
+  variant?: "full" | "minimal";
 };
 
 /** Wordmark tipográfico Victorian / Circus con textura distressed */
-export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkProps) {
+export function InsigneWordmark({
+  className,
+  size = "hero",
+  variant = "full",
+}: InsigneWordmarkProps) {
   const { t } = useSiteLanguage();
   const isHero = size === "hero";
+  const minimal = variant === "minimal";
 
   return (
     <div
@@ -22,36 +29,26 @@ export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkPro
       )}
       aria-label="Insigne Corpus Tattoo"
     >
-      <svg className="pointer-events-none absolute h-0 w-0" aria-hidden>
-        <defs>
-          <filter id="insigne-distress" x="-8%" y="-8%" width="116%" height="116%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.85"
-              numOctaves="4"
-              seed="12"
-              result="noise"
-            />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" />
-          </filter>
-        </defs>
-      </svg>
-
-      <p
-        className={cn(
-          "wordmark-vintage__eyebrow font-sans font-semibold uppercase tracking-[0.42em] text-amber-200/75",
-          isHero ? "text-[0.52rem] md:text-[0.62rem]" : "text-[0.48rem]",
-        )}
-      >
-        {t("wordmarkEyebrow")}
-      </p>
+      {!minimal ? (
+        <p
+          className={cn(
+            "wordmark-vintage__eyebrow font-sans font-semibold uppercase tracking-[0.42em] text-amber-200/75",
+            isHero ? "text-[0.52rem] md:text-[0.62rem]" : "text-[0.48rem]",
+          )}
+        >
+          {t("wordmarkEyebrow")}
+        </p>
+      ) : null}
 
       <h1
         className={cn(
           "wordmark-vintage__title font-vintage uppercase leading-[0.88] text-[#f4e8d4]",
-          isHero
-            ? "mt-2 text-[2.35rem] sm:text-[3.1rem] md:text-[4.6rem] lg:text-[5.2rem]"
-            : "mt-1 text-[1.85rem] sm:text-[2.4rem]",
+          minimal && isHero
+            ? "text-[2.6rem] sm:text-[3.4rem] md:text-[5rem] lg:text-[5.6rem]"
+            : isHero
+              ? "mt-2 text-[2.35rem] sm:text-[3.1rem] md:text-[4.6rem] lg:text-[5.2rem]"
+              : "mt-1 text-[1.85rem] sm:text-[2.4rem]",
+          !minimal && isHero && "mt-2",
         )}
       >
         <span className="wordmark-vintage__line block">Insigne</span>
@@ -60,20 +57,26 @@ export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkPro
 
       <p
         className={cn(
-          "wordmark-vintage__tattoo font-vintage mt-1 uppercase tracking-[0.28em] text-amber-400/95",
-          isHero ? "text-[1.05rem] md:text-[1.35rem]" : "text-[0.95rem]",
+          "wordmark-vintage__tattoo font-vintage uppercase tracking-[0.28em] text-amber-400/95",
+          minimal && isHero
+            ? "mt-1.5 text-[1.15rem] md:text-[1.45rem]"
+            : isHero
+              ? "mt-1 text-[1.05rem] md:text-[1.35rem]"
+              : "mt-1 text-[0.95rem]",
         )}
       >
         Tattoo
       </p>
 
-      <div className="wordmark-vintage__ornament mx-auto mt-3 flex items-center justify-center gap-3 opacity-80">
-        <span className="h-px w-10 bg-gradient-to-r from-transparent to-amber-600/70 md:w-16" />
-        <span className="font-serif text-[0.65rem] uppercase tracking-[0.35em] text-amber-300/60 md:text-xs">
-          {t("wordmarkOrnament")}
-        </span>
-        <span className="h-px w-10 bg-gradient-to-l from-transparent to-amber-600/70 md:w-16" />
-      </div>
+      {!minimal ? (
+        <div className="wordmark-vintage__ornament mx-auto mt-3 flex items-center justify-center gap-3 opacity-80">
+          <span className="h-px w-10 bg-gradient-to-r from-transparent to-amber-600/70 md:w-16" />
+          <span className="font-serif text-[0.65rem] uppercase tracking-[0.35em] text-amber-300/60 md:text-xs">
+            {t("wordmarkOrnament")}
+          </span>
+          <span className="h-px w-10 bg-gradient-to-l from-transparent to-amber-600/70 md:w-16" />
+        </div>
+      ) : null}
     </div>
   );
 }

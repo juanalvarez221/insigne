@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Heart } from "lucide-react";
 import { QuoteShell } from "@/widgets/quote/QuoteShell";
+import { SocialIcon } from "@/widgets/brand/SocialIcon";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 import { BRAND, whatsappUrl } from "@/shared/config/brand";
 
@@ -17,7 +17,7 @@ export function QuoteThanksStep() {
         <div className="pointer-events-none absolute -right-10 bottom-0 h-44 w-44 rounded-full bg-amber-700/20 blur-[80px]" />
 
         <article className="glass-card relative overflow-hidden rounded-3xl border border-amber-500/20 p-6 text-center md:p-8">
-          <div className="absolute inset-0 bg-[radial-gradient(520px_220px_at_50%_0%,rgba(217,70,239,0.16),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(520px_220px_at_50%_0%,rgba(234,88,12,0.14),transparent_65%)]" />
 
           <div className="relative z-10">
             <p className="typo-tech inline-flex items-center gap-2 uppercase tracking-[0.16em] text-amber-200/90">
@@ -37,18 +37,11 @@ export function QuoteThanksStep() {
                 href={BRAND.instagram.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-orange-400/35 bg-gradient-to-r from-orange-600 to-orange-600 px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(234,88,12,0.45)]"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-800 to-orange-600 px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(234,88,12,0.4)]"
               >
-                <span className="relative h-6 w-6 overflow-hidden rounded-full">
-                  <Image
-                    src="/brand/instagram-bubble-clean.png"
-                    alt="Instagram"
-                    fill
-                    className="object-contain"
-                  />
-                </span>
+                <SocialIcon kind="instagram" size={22} />
                 {t("quoteThanksInstagramCta")}
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-4 w-4 opacity-80" />
               </a>
 
               <Link
@@ -62,16 +55,9 @@ export function QuoteThanksStep() {
                 href={whatsappUrl(BRAND.whatsapp.thanksMessage)}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/35 bg-emerald-500/15 px-5 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-emerald-100 transition hover:bg-emerald-500/20"
+                className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-amber-500/25 bg-black/40 px-5 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-amber-50 transition hover:border-amber-400/40 hover:bg-black/55"
               >
-                <span className="relative h-6 w-6 overflow-hidden rounded-full">
-                  <Image
-                    src="/brand/whatsapp-bubble-clean.png"
-                    alt="WhatsApp"
-                    fill
-                    className="object-contain"
-                  />
-                </span>
+                <SocialIcon kind="whatsapp" size={22} />
                 {t("quoteThanksWhatsappCta")}
               </a>
             </div>

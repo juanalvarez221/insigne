@@ -12,26 +12,24 @@ import {
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { ProjectsCarousel } from "@/widgets/home/ProjectsCarousel";
-import { InsigneIntroCarousel } from "@/widgets/home/InsigneIntroCarousel";
+import { ConnectSection } from "@/widgets/home/ConnectSection";
 import { InsigneWordmark } from "@/widgets/brand/InsigneWordmark";
+import { FloatingSocialDock } from "@/widgets/brand/FloatingSocialDock";
 import { useSiteLanguage } from "@/shared/i18n/LanguageProvider";
 import { BRAND, whatsappUrl } from "@/shared/config/brand";
 
 type HeroSplashProps = {
   backgroundImageUrl: string;
   backgroundImageUrls?: string[];
-  artistName: string;
-  subtitle: string;
 };
 
 export function HeroSplash({
   backgroundImageUrl,
   backgroundImageUrls,
-  artistName,
-  subtitle,
 }: HeroSplashProps) {
   const { t } = useSiteLanguage();
   const sectionRef = useRef<HTMLElement>(null);
+  const portfolioRef = useRef<HTMLDivElement>(null);
   const [heroIndex, setHeroIndex] = useState(0);
   const heroImages =
     backgroundImageUrls && backgroundImageUrls.length > 0
@@ -51,13 +49,9 @@ export function HeroSplash({
   const heroBlur = useTransform(scrollYProgress, [0, 1], [0, 2.4]);
   const heroFilter = useMotionTemplate`blur(${heroBlur}px)`;
 
-  const markY = useTransform(scrollYProgress, [0, 1], [24, 36]);
-  const markOpacity = useTransform(scrollYProgress, [0, 0.55, 1], [1, 0.76, 0.12]);
-  const markScale = useTransform(scrollYProgress, [0, 0.55, 1], [0.92, 1.02, 1.14]);
-  const markBlur = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0.6, 2.8]);
-  const markFilter = useMotionTemplate`blur(${markBlur}px)`;
-  const subtitleY = useTransform(scrollYProgress, [0, 1], [0, 52]);
-  const subtitleOpacity = useTransform(scrollYProgress, [0, 1], [0.88, 0.38]);
+  const markY = useTransform(scrollYProgress, [0, 1], [16, 28]);
+  const markOpacity = useTransform(scrollYProgress, [0, 0.55, 1], [1, 0.82, 0.15]);
+  const markScale = useTransform(scrollYProgress, [0, 0.55, 1], [0.96, 1.02, 1.1]);
 
   useEffect(() => {
     if (!useHeroCarousel) return;
@@ -66,6 +60,10 @@ export function HeroSplash({
     }, 7000);
     return () => window.clearInterval(id);
   }, [heroImages.length, useHeroCarousel]);
+
+  const scrollToPortfolio = () => {
+    portfolioRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <main className="relative overflow-hidden bg-[#080605] text-white">
@@ -105,71 +103,60 @@ export function HeroSplash({
           <div className="hero-cinematic__grain absolute inset-0 z-[3]" />
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-0 z-[4] flex h-[100dvh] w-full flex-col items-center justify-end px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center sm:px-6 sm:pb-14 md:pb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            style={{
-              y: markY,
-              opacity: markOpacity,
-              scale: markScale,
-              filter: markFilter,
-            }}
-            className="hero-cinematic__text-shadow z-20 w-full max-w-[min(100%,52rem)] will-change-transform"
-          >
-            <InsigneWordmark size="hero" />
-          </motion.div>
+        <div className="pointer-events-none absolute inset-0 z-[4] grid h-[100dvh] min-h-[100svh] w-full grid-rows-[minmax(0,1fr)_auto]">
+          <div aria-hidden className="min-h-[30vh] sm:min-h-[34vh] md:min-h-[40vh]" />
 
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 0.92, y: 0 }}
-            transition={{ delay: 0.05, duration: 0.45, ease: "easeOut" }}
-            style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="font-sans mt-2 max-w-lg text-[0.58rem] font-medium uppercase tracking-[0.2em] text-amber-50 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] sm:mt-3 sm:text-[0.75rem] md:max-w-xl md:tracking-[0.26em]"
-          >
-            {t("heroSubtitle") ?? subtitle}
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-            style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="font-sans mx-auto mt-2 hidden max-w-md text-[0.72rem] leading-relaxed text-amber-50/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:mt-3 sm:block md:max-w-xl md:text-sm"
-          >
-            {t("heroMotoLine")}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, duration: 0.5, ease: "easeOut" }}
-            className="pointer-events-auto mt-5 w-full max-w-[min(100%,20rem)] sm:mt-6 sm:max-w-xs md:mt-7"
-          >
-            <Link href="/cotizacion" className="btn-brand typo-cta group inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 md:py-4">
-              {t("heroCta")}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.45 }}
-            className="pointer-events-auto mt-3.5 flex flex-col items-center gap-1 md:mt-4"
-          >
-            <motion.span
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-amber-200/25 bg-black/40"
+          <div className="flex flex-col items-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center sm:px-6 sm:pb-12 md:pb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              style={{ y: markY, opacity: markOpacity, scale: markScale }}
+              className="z-20 w-full max-w-[min(100%,52rem)] will-change-transform"
             >
-              <ChevronDown className="h-4 w-4 text-amber-100/90" />
-            </motion.span>
-            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-amber-100/75 md:text-[11px]">
-              {t("heroScroll")}
-            </p>
-          </motion.div>
+              <InsigneWordmark size="hero" variant="minimal" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08, duration: 0.5, ease: "easeOut" }}
+              className="pointer-events-auto z-20 mt-6 flex w-full max-w-sm flex-col gap-3 sm:max-w-md sm:flex-row sm:justify-center"
+            >
+              <Link
+                href="/cotizacion"
+                className="btn-brand typo-cta group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-3.5 md:py-4"
+              >
+                {t("heroCtaQuote")}
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+              <a
+                href={whatsappUrl(BRAND.whatsapp.quoteMessage)}
+                target="_blank"
+                rel="noreferrer"
+                className="typo-cta inline-flex flex-1 items-center justify-center rounded-xl border border-amber-200/25 bg-black/45 px-5 py-3.5 text-amber-50 backdrop-blur-sm transition hover:border-amber-400/40 hover:bg-black/55 md:py-4"
+              >
+                {t("heroCtaWhatsapp")}
+              </a>
+            </motion.div>
+
+            <motion.button
+              type="button"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.18, duration: 0.45 }}
+              onClick={scrollToPortfolio}
+              aria-label={t("heroScrollAria")}
+              className="pointer-events-auto mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-amber-200/25 bg-black/40 transition hover:border-amber-300/40 hover:bg-black/55"
+            >
+              <motion.span
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ChevronDown className="h-5 w-5 text-amber-100/90" />
+              </motion.span>
+            </motion.button>
+          </div>
         </div>
 
         <div className="absolute bottom-0 z-20 h-px w-full bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
@@ -184,100 +171,17 @@ export function HeroSplash({
       >
         <div className="glass-card relative overflow-hidden rounded-3xl p-5 md:p-8">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(520px_220px_at_10%_0%,rgba(234,88,12,0.16),transparent_58%),radial-gradient(620px_260px_at_100%_100%,rgba(180,83,9,0.14),transparent_60%)]" />
-          <div className="relative z-10">
-            <p className="text-accent-muted text-xs font-semibold uppercase tracking-[0.24em]">
-              {t("identityTag")}
-            </p>
-            <h2 className="typo-section mt-2 max-w-4xl">{t("identityTitle")}</h2>
-            <p className="typo-body mt-3 max-w-3xl text-zinc-300">{t("identityP1")}</p>
-            <p className="typo-body mt-3 max-w-3xl text-zinc-400">{t("identityP2")}</p>
-            <p className="typo-body mt-2 max-w-3xl text-zinc-500">{t("identityP3")}</p>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-amber-600/20 bg-amber-950/30 p-4">
-                <p className="font-sans text-sm font-semibold text-amber-100">{t("identityCard1Title")}</p>
-                <p className="typo-body mt-2 text-sm text-zinc-300">{t("identityCard1Body")}</p>
-              </div>
-              <div className="rounded-2xl border border-amber-600/20 bg-amber-950/30 p-4">
-                <p className="font-sans text-sm font-semibold text-amber-100">{t("identityCard2Title")}</p>
-                <p className="typo-body mt-2 text-sm text-zinc-300">{t("identityCard2Body")}</p>
-              </div>
-              <div className="rounded-2xl border border-amber-600/20 bg-amber-950/30 p-4">
-                <p className="font-sans text-sm font-semibold text-amber-100">{t("identityCard3Title")}</p>
-                <p className="typo-body mt-2 text-sm text-zinc-300">{t("identityCard3Body")}</p>
-              </div>
-            </div>
-
-            <InsigneIntroCarousel />
-          </div>
+          <ConnectSection />
         </div>
 
-        <div className="relative mt-8 md:mt-10">
+        <div ref={portfolioRef} className="relative mt-8 md:mt-10">
           <div className="pointer-events-none absolute -left-8 -top-4 h-24 w-24 rounded-full bg-amber-600/12 blur-[42px]" />
           <div className="pointer-events-none absolute -right-6 bottom-0 h-24 w-24 rounded-full bg-orange-500/10 blur-[42px]" />
           <ProjectsCarousel />
         </div>
       </motion.section>
 
-      <motion.aside
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.55, ease: "easeOut" }}
-        className="pointer-events-none fixed bottom-5 right-4 z-[70] flex flex-col items-center gap-3 md:bottom-6 md:right-5"
-        aria-label="Accesos rapidos sociales"
-      >
-        <motion.a
-          href={BRAND.instagram.url}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Ir al Instagram de ${BRAND.shortName}`}
-          animate={{ y: [0, -3, 0], scale: [1, 1.02, 1] }}
-          transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ y: -4, scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className="pointer-events-auto relative inline-flex h-14 w-14 items-center justify-center rounded-full"
-        >
-          <motion.span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-full bg-amber-400/50 blur-[12px]"
-            animate={{ opacity: [0, 0, 0.95, 0, 0, 0.72, 0], scale: [0.88, 0.88, 1.2, 1.24, 0.9, 1.16, 0.9] }}
-            transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.54, 0.58, 0.63, 0.9, 0.94, 1] }}
-          />
-          <Image
-            src="/brand/instagram-bubble-clean.png"
-            alt="Instagram"
-            width={56}
-            height={56}
-            className="h-14 w-14 object-contain drop-shadow-[0_14px_28px_rgba(234,88,12,0.38)]"
-          />
-        </motion.a>
-
-        <motion.a
-          href={whatsappUrl(BRAND.whatsapp.quoteMessage)}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Hablar por WhatsApp con ${BRAND.shortName}`}
-          animate={{ y: [0, -3, 0], scale: [1, 1.02, 1] }}
-          transition={{ duration: 3.2, delay: 0.45, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ y: -4, scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className="pointer-events-auto relative inline-flex h-14 w-14 items-center justify-center rounded-full"
-        >
-          <motion.span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-full bg-orange-400/45 blur-[12px]"
-            animate={{ opacity: [0, 0, 0.92, 0, 0, 0.68, 0], scale: [0.88, 0.88, 1.18, 1.22, 0.9, 1.14, 0.9] }}
-            transition={{ duration: 9.1, repeat: Infinity, ease: "easeInOut", delay: 0.6, times: [0, 0.56, 0.6, 0.64, 0.9, 0.95, 1] }}
-          />
-          <Image
-            src="/brand/whatsapp-bubble-clean.png"
-            alt="WhatsApp"
-            width={56}
-            height={56}
-            className="h-14 w-14 object-contain drop-shadow-[0_14px_28px_rgba(234,88,12,0.32)]"
-          />
-        </motion.a>
-      </motion.aside>
+      <FloatingSocialDock />
     </main>
   );
 }
