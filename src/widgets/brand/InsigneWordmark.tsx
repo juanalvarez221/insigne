@@ -32,12 +32,7 @@ export function InsigneWordmark({ className, size = "hero" }: InsigneWordmarkPro
               seed="12"
               result="noise"
             />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" />
-          </filter>
-          <filter id="insigne-grain" x="0%" y="0%" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" result="g" />
-            <feColorMatrix type="saturate" values="0" in="g" result="gray" />
-            <feBlend in="SourceGraphic" in2="gray" mode="multiply" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" />
           </filter>
         </defs>
       </svg>

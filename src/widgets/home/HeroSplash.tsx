@@ -73,45 +73,39 @@ export function HeroSplash({
       <div className="pointer-events-none absolute -left-24 top-[36%] h-64 w-64 rounded-full bg-amber-600/14 blur-[95px] md:h-96 md:w-96" />
       <div className="pointer-events-none absolute -right-16 top-[58%] h-64 w-64 rounded-full bg-orange-500/12 blur-[95px] md:h-[26rem] md:w-[26rem]" />
 
-      <section ref={sectionRef} className="relative h-[112dvh] w-full md:h-[118dvh]">
+      <section ref={sectionRef} className="relative min-h-[100dvh] w-full">
         <motion.div
-          className="sticky top-0 h-[100dvh] overflow-hidden"
+          className="sticky top-0 h-[100dvh] min-h-[100svh] w-full overflow-hidden"
           style={{ y: imageY, scale: imageScale, opacity: heroOpacity, filter: heroFilter }}
         >
-          <div className="hero-cinematic__backdrop absolute inset-0" aria-hidden />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentHeroImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              className="hero-cinematic__media"
+            >
+              <Image
+                src={currentHeroImage}
+                alt={t("introPhoto1Alt")}
+                fill
+                priority
+                quality={100}
+                sizes="100vw"
+                className="hero-cinematic__photo"
+              />
+            </motion.div>
+          </AnimatePresence>
 
-          <div className="hero-cinematic__stage">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentHeroImage}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="hero-cinematic__frame"
-              >
-                <div className="hero-cinematic__media">
-                  <Image
-                    src={currentHeroImage}
-                    alt={t("introPhoto1Alt")}
-                    fill
-                    priority
-                    quality={100}
-                    sizes="(max-width: 768px) 100vw, 72rem"
-                    className="hero-cinematic__photo"
-                  />
-                </div>
-                <div className="hero-cinematic__vignette absolute inset-0 z-[1]" aria-hidden />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="hero-cinematic__grade absolute inset-0 z-[3]" />
-          <div className="hero-cinematic__rays absolute inset-0 z-[3]" />
-          <div className="hero-cinematic__grain absolute inset-0 z-[4]" />
+          <div className="hero-cinematic__vignette absolute inset-0 z-[1]" aria-hidden />
+          <div className="hero-cinematic__grade absolute inset-0 z-[2]" />
+          <div className="hero-cinematic__rays absolute inset-0 z-[2]" />
+          <div className="hero-cinematic__grain absolute inset-0 z-[3]" />
         </motion.div>
 
-        <div className="absolute inset-0 z-[4] flex h-[100dvh] w-full flex-col items-center justify-end px-6 pb-16 text-center md:pb-14">
+        <div className="pointer-events-none absolute inset-0 z-[4] flex h-[100dvh] w-full flex-col items-center justify-end px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center sm:px-6 sm:pb-14 md:pb-16">
           <motion.div
             initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -122,7 +116,7 @@ export function HeroSplash({
               scale: markScale,
               filter: markFilter,
             }}
-            className="z-20 will-change-transform"
+            className="hero-cinematic__text-shadow z-20 w-full max-w-[min(100%,52rem)] will-change-transform"
           >
             <InsigneWordmark size="hero" />
           </motion.div>
@@ -132,7 +126,7 @@ export function HeroSplash({
             animate={{ opacity: 0.92, y: 0 }}
             transition={{ delay: 0.05, duration: 0.45, ease: "easeOut" }}
             style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="font-sans mt-3 text-[0.58rem] font-medium uppercase tracking-[0.22em] text-amber-100/85 md:text-[0.8rem] md:tracking-[0.28em]"
+            className="font-sans mt-2 max-w-lg text-[0.58rem] font-medium uppercase tracking-[0.2em] text-amber-50 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] sm:mt-3 sm:text-[0.75rem] md:max-w-xl md:tracking-[0.26em]"
           >
             {t("heroSubtitle") ?? subtitle}
           </motion.p>
@@ -142,7 +136,7 @@ export function HeroSplash({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
             style={{ y: subtitleY, opacity: subtitleOpacity }}
-            className="font-sans mx-auto mt-3 max-w-md text-[0.72rem] leading-relaxed text-amber-50/80 md:max-w-xl md:text-sm"
+            className="font-sans mx-auto mt-2 hidden max-w-md text-[0.72rem] leading-relaxed text-amber-50/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:mt-3 sm:block md:max-w-xl md:text-sm"
           >
             {t("heroMotoLine")}
           </motion.p>
@@ -151,7 +145,7 @@ export function HeroSplash({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.5, ease: "easeOut" }}
-            className="mt-6 w-full max-w-[320px] md:mt-7 md:max-w-sm"
+            className="pointer-events-auto mt-5 w-full max-w-[min(100%,20rem)] sm:mt-6 sm:max-w-xs md:mt-7"
           >
             <Link href="/cotizacion" className="btn-brand typo-cta group inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 md:py-4">
               {t("heroCta")}
@@ -163,7 +157,7 @@ export function HeroSplash({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.45 }}
-            className="mt-3.5 flex flex-col items-center gap-1 md:mt-4"
+            className="pointer-events-auto mt-3.5 flex flex-col items-center gap-1 md:mt-4"
           >
             <motion.span
               animate={{ y: [0, 4, 0] }}
